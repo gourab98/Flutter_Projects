@@ -63,7 +63,10 @@ class CollapsingList extends StatelessWidget {
             //   headerText,
             //   style: TextStyle(color: Colors.white),
             // ),
-            child: Image(image: AssetImage('assets/sam-photo.jpg')),
+//            child: Container(height: 100, width: 100, color: Colors.black),
+            child: Container(
+                child: Image(image: AssetImage('assets/images.jpg')),
+                color: Colors.blue),
           ),
         ),
       ),
@@ -84,7 +87,7 @@ class CollapsingList extends StatelessWidget {
 //        makeHeader('Pinned', 100, 100, Colors.blue),
 //        makeHeader('Floating', 0, 250, Colors.green),
         makeHeader(Image(image: AssetImage('assets/sam-photo.jpg')),
-            'Please Run', 100, 400, Colors.green),
+            'Please Run', 100, 500, Colors.green),
 
         SliverList(
             delegate: SliverChildListDelegate([
