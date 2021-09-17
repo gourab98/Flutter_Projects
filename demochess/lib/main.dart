@@ -59,10 +59,29 @@ class CollapsingList extends StatelessWidget {
       delegate: _SliverAppBarDelegate(
         minHeight: minHeight,
         maxHeight: maxHeight,
-        child: Container(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: MyHomePage(title: 'GridTest'),
+        // child: Container(
+        //   color: Colors.red,
+        //   child: AspectRatio(
+        //     aspectRatio: 1,
+        //     child: MyHomePage(title: 'Grid_Test'),
+        //   ),
+        // ),
+//        child: MyHomePage(title: 'What Is Going ON!!'),
+//        child: Center(child: MyHomePage()),
+        child: Center(
+          child: GridView.count(
+            crossAxisCount: 8,
+            children: List.generate(64, (index) {
+              return Container(
+                child: Center(
+                  child: Container(
+                    child: Text('$index'),
+                    color: Colors.white,
+                  ),
+                ),
+                color: Colors.blue,
+              );
+            }),
           ),
         ),
       ),
@@ -73,18 +92,34 @@ class CollapsingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        // AspectRatio(
-        //   aspectRatio: 1,
-        //   child: makeHeader(MyHomePage(title: 'Grid_Test'), 'GridTesting', 200,
-        //       500, Colors.green),
-        // ),
-        makeHeader(MyHomePage(title: 'Grid_Test'), 'GridTesting', 200, 500,
-            Colors.green),
+//        makeHeader(MyHomePage(title: 'GridTest'), 'GridTesting', 200, 500,Colors.pinkAccent),
+//        makeHeader(MyHomePage(), 'GridTesting', 200, 500, Colors.pinkAccent),
+        makeHeader(
+            Center(
+              child: GridView.count(
+                crossAxisCount: 8,
+                children: List.generate(64, (index) {
+                  return Container(
+                    child: Center(
+                      child: Container(
+                        child: Text('$index'),
+                        color: Colors.white,
+                      ),
+                    ),
+                    color: Colors.blue,
+                  );
+                }),
+              ),
+            ),
+            'GridTesting',
+            200,
+            500,
+            Colors.pinkAccent),
         SliverList(
             delegate: SliverChildListDelegate([
           Container(
               height: 1000,
-              color: Colors.white,
+              color: Colors.yellow,
               child: Center(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,9 +135,12 @@ class CollapsingList extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+//  MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  // MyHomePage({
+  //   required this.title,
+  // });
+  // final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -127,21 +165,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+//        title: Text(widget.title),
+        title: Text('Go On'),
       ),
-      body: GridView.count(
-        crossAxisCount: 8,
-        children: List.generate(64, (index) {
-          return Container(
-            child: Center(
-              child: Container(
-                child: Text('$index'),
-                color: Colors.white,
-              ),
-            ),
-            color: check(index),
-          );
-        }),
+      body: Center(
+        child: Center(
+          child: GridView.count(
+            crossAxisCount: 8,
+            children: List.generate(64, (index) {
+              return Container(
+                child: Center(
+                  child: Container(
+                    child: Text('$index'),
+                    color: Colors.white,
+                  ),
+                ),
+                color: check(index),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }
