@@ -1,5 +1,7 @@
+//import 'dart:math';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+//import 'package:flutter_stateless_chessboard/flutter_stateless_chessboard.dart' as cb;
+//import 'utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,15 +11,65 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-//      home: MyHomePage(title: 'GridTest'),
-      home: CollapsingList(),
+      home: MyHomePage(),
+//      home: CollapsingList(),
     );
   }
 }
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  Color check(int num) {
+    if ((num >= 8 && num <= 15) ||
+        (num >= 24 && num <= 31) ||
+        (num >= 40 && num <= 47) ||
+        (num >= 56 && num <= 63)) {
+      num++;
+    }
+    if (num % 2 == 0) {
+      return Colors.white;
+    } else {
+      return Colors.black;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+//        title: Text(widget.title),
+        title: Text('Go On'),
+      ),
+      body: Align(
+        alignment: Alignment.center,
+        child: GridView.count(
+          crossAxisCount: 8,
+          children: List.generate(64, (index) {
+            return Container(
+              child: Center(
+                child: Container(
+                  child: Text('$index'),
+                  color: Colors.white,
+                ),
+              ),
+              color: check(index),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+//After My App(StatelessWidget Class)
+/*
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
@@ -67,23 +119,7 @@ class CollapsingList extends StatelessWidget {
         //   ),
         // ),
 //        child: MyHomePage(title: 'What Is Going ON!!'),
-//        child: Center(child: MyHomePage()),
-        child: Center(
-          child: GridView.count(
-            crossAxisCount: 8,
-            children: List.generate(64, (index) {
-              return Container(
-                child: Center(
-                  child: Container(
-                    child: Text('$index'),
-                    color: Colors.white,
-                  ),
-                ),
-                color: Colors.blue,
-              );
-            }),
-          ),
-        ),
+        child: Center(child: MyHomePage()),
       ),
     );
   }
@@ -93,28 +129,8 @@ class CollapsingList extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
 //        makeHeader(MyHomePage(title: 'GridTest'), 'GridTesting', 200, 500,Colors.pinkAccent),
-//        makeHeader(MyHomePage(), 'GridTesting', 200, 500, Colors.pinkAccent),
-        makeHeader(
-            Center(
-              child: GridView.count(
-                crossAxisCount: 8,
-                children: List.generate(64, (index) {
-                  return Container(
-                    child: Center(
-                      child: Container(
-                        child: Text('$index'),
-                        color: Colors.white,
-                      ),
-                    ),
-                    color: Colors.blue,
-                  );
-                }),
-              ),
-            ),
-            'GridTesting',
-            200,
-            500,
-            Colors.pinkAccent),
+        makeHeader(MyHomePage(), 'GridTesting', 200, 500, Colors.pinkAccent),
+
         SliverList(
             delegate: SliverChildListDelegate([
           Container(
@@ -134,58 +150,4 @@ class CollapsingList extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-//  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // MyHomePage({
-  //   required this.title,
-  // });
-  // final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  Color check(int num) {
-    if ((num >= 8 && num <= 15) ||
-        (num >= 24 && num <= 31) ||
-        (num >= 40 && num <= 47) ||
-        (num >= 56 && num <= 63)) {
-      num++;
-    }
-    if (num % 2 == 0) {
-      return Colors.white;
-    } else {
-      return Colors.black;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-//        title: Text(widget.title),
-        title: Text('Go On'),
-      ),
-      body: Center(
-        child: Center(
-          child: GridView.count(
-            crossAxisCount: 8,
-            children: List.generate(64, (index) {
-              return Container(
-                child: Center(
-                  child: Container(
-                    child: Text('$index'),
-                    color: Colors.white,
-                  ),
-                ),
-                color: check(index),
-              );
-            }),
-          ),
-        ),
-      ),
-    );
-  }
-}
+*/
