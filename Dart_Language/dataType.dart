@@ -33,4 +33,5 @@ void StringManupulation() {
   String s9 = s1 + s2 + s3 + s4 + s5 + s7 + s8;
 
   print(s9);
+  print('The number of character in String s9 is ${s9.length - 33} + 33');
 }
