@@ -24,6 +24,9 @@ void main() {
   }
 
   for (int num in ageList) {
+    if (num == 13) {
+      continue;
+    }
     print(num);
   }
 }
