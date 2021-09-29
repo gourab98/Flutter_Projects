@@ -1,27 +1,43 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(testApp());
+  runApp(MyApp());
 }
 
-// ignore: camel_case_types
-class testApp extends StatelessWidget {
-  const testApp({Key? key}) : super(key: key);
-
-  @override
+class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Container(
-        child: Text('$Color._value(1)'),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: MyWidget(),
     );
   }
 }
 
-class Color {
-  final int value;
-  const Color._value(this.value);
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
 
-  static const Color WHITE = const Color._value(0);
-  static const Color BLACK = const Color._value(1);
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    var myDrawer = Container(color: Colors.blue);
+    var myChild = Container(color: Colors.yellow);
+    return Scaffold(
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            myDrawer,
+            Transform(
+              transform: Matrix4.identity()
+//              ..translate()
+                ..scale(0.5),
+              alignment: Alignment.centerLeft,
+              child: myChild,
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
