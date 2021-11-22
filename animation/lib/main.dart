@@ -1,4 +1,8 @@
+import 'package:animation/tween_example.dart';
+import 'package:animation/tween_example1.dart';
 import 'package:flutter/material.dart';
+
+import 'package:animation/myhomepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,49 +18,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: const MyHomePage(title: 'Flutter Animation Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  bool _bigger = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AnimatedContainer(
-              width: _bigger ? 100 : 400,
-              child: Image.asset("images/2880.jpg"),
-              duration: Duration(milliseconds: 500),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _bigger = !_bigger;
-                });
-              },
-              child: Icon(Icons.star),
-            )
-          ],
-        ),
-      ),
+//      home: const MyHomePage(title: 'Flutter Animation Home Page'),
+//      home: const TweenExample1(),
+      home: const TweenExample2(),
     );
   }
 }
