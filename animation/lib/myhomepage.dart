@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
                 height: _bigger ? 30 : 120,
                 width: _bigger ? 30 : 120,
-                duration: Duration(seconds: 2),
+                duration: Duration(seconds: 1),
               ),
             ),
           ],

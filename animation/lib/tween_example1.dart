@@ -22,8 +22,8 @@ class _TweenExample2State extends State<TweenExample2> {
 //        starsBackground,
         Background(),
         Center(
-          child: TweenAnimationBuilder<Color>(
-            tween: Tween(begin: Colors.white, end: Colors.orange),
+          child: TweenAnimationBuilder(
+            tween: Tween<Color>(begin: Colors.white, end: Colors.orange),
             duration: Duration(seconds: 2),
             builder: (_, Color color, __) {
               return ColorFiltered(
