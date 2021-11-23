@@ -1,4 +1,5 @@
 import 'package:animation/explicit_animations_1.dart';
+import 'package:animation/explicit_animations_3.dart';
 import 'package:animation/tween_example.dart';
 import 'package:animation/tween_example1.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
 //      home: const MyHomePage(title: 'Flutter Animation Home Page'),
 //      home: const TweenExample1(),
 //      home: const TweenExample2(),
-      home: AnimationScreen1(),
+//      home: AnimationScreen1(),
 //      home: AnimationScreen2(),
+      home: AnimationScreen3(),
     );
   }
 }
