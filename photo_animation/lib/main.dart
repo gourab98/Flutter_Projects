@@ -203,7 +203,15 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  Text(widget.title),
+                  Center(
+                    child: Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 20.0),
                   const Text(_theText),
                 ],
