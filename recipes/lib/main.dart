@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             Image(image: AssetImage(recipes.imageURL)),
-            SizedBox(height: 14.0),
+            SizedBox(height: 16.0),
             Text(
               recipes.label,
               style: const TextStyle(
