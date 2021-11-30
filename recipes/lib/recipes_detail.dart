@@ -35,7 +35,7 @@ class _RecipesDetailState extends State<RecipesDetail> {
               ),
             ),
             SizedBox(
-              height: 4,
+              height: 4.0,
             ),
             Text(
               widget.recipe.label,
