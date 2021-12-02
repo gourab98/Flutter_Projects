@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ludo/ludo_board.dart';
 
 void main() {
   runApp(const MyApp());
@@ -275,7 +276,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return newPage(colorName, playerName);
+                        // return newPage(colorName, playerName);
+                        return LudoBoard(
+                          colorName: colorName,
+                          playerName: playerName,
+                        );
                       },
                     ),
                   );
