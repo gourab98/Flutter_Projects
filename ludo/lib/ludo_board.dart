@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class LudoBoard extends StatefulWidget {
   final String colorName;
@@ -14,147 +15,170 @@ class LudoBoard extends StatefulWidget {
 }
 
 class _LudoBoardState extends State<LudoBoard> {
+  var dice = new Random();
+  int number = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("${widget.colorName}  ${widget.playerName}"),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          double sizeHeight = constraints.maxHeight;
-          double sizeWeight = constraints.maxWidth;
-          Size size = Size(sizeHeight, sizeWeight);
-          double boardSize = size.height;
-          double pieceSize = size.height / 15;
+      body: SafeArea(
+        child: ListView(
+          children: <Widget>[
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double sizeHeight = constraints.maxHeight;
+                double sizeWeight = constraints.maxWidth;
+                Size size = Size(sizeHeight, sizeWeight);
+                double boardSize = size.height;
+                double pieceSize = size.height / 15;
 
-          return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Stack(
-                  //              alignment: Alignment.topCenter,
-                  children: <Widget>[
-                    GridView.count(
-                      crossAxisCount: 15,
-                      childAspectRatio: 1,
-                      children: List<Widget>.generate(
-                        225,
-                        (index) {
-                          return GridTile(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                              ),
-                              //child: Text("$index"),
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Stack(
+                        children: <Widget>[
+                          GridView.count(
+                            crossAxisCount: 15,
+                            childAspectRatio: 1,
+                            children: List<Widget>.generate(
+                              225,
+                              (index) {
+                                return GridTile(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                    ),
+                                    //child: Text("$index"),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          ),
+                          CustomPaint(
+                            size: Size(sizeHeight, sizeWeight),
+                            painter: MyPainterLeftUp(),
+                          ),
+                          ludoPiece(
+                              left: boardSize * (1 / 15),
+                              top: boardSize * (1 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.green.shade300),
+                          ludoPiece(
+                              left: boardSize * (4 / 15),
+                              top: boardSize * (1 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.green.shade300),
+                          ludoPiece(
+                              left: boardSize * (1 / 15),
+                              top: boardSize * (4 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.green.shade300),
+                          ludoPiece(
+                              left: boardSize * (4 / 15),
+                              top: boardSize * (4 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.green.shade300),
+                          CustomPaint(
+                            size: Size(sizeHeight, sizeWeight),
+                            painter: MyPainterRightUp(),
+                          ),
+                          ludoPiece(
+                              left: boardSize * (10 / 15),
+                              top: boardSize * (1 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.yellow.shade300),
+                          ludoPiece(
+                              left: boardSize * (13 / 15),
+                              top: boardSize * (1 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.yellow.shade300),
+                          ludoPiece(
+                              left: boardSize * (10 / 15),
+                              top: boardSize * (4 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.yellow.shade300),
+                          ludoPiece(
+                              left: boardSize * (13 / 15),
+                              top: boardSize * (4 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.yellow.shade300),
+                          CustomPaint(
+                            size: Size(sizeHeight, sizeWeight),
+                            painter: MyPainterLeftDown(),
+                          ),
+                          ludoPiece(
+                              left: boardSize * (1 / 15),
+                              top: boardSize * (10 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.red.shade300),
+                          ludoPiece(
+                              left: boardSize * (4 / 15),
+                              top: boardSize * (10 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.red.shade300),
+                          ludoPiece(
+                              left: boardSize * (1 / 15),
+                              top: boardSize * (13 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.red.shade300),
+                          ludoPiece(
+                              left: boardSize * (4 / 15),
+                              top: boardSize * (13 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.red.shade300),
+                          CustomPaint(
+                            size: Size(sizeHeight, sizeWeight),
+                            painter: MyPainterRightDown(),
+                          ),
+                          ludoPiece(
+                              left: boardSize * (10 / 15),
+                              top: boardSize * (10 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.blue.shade300),
+                          ludoPiece(
+                              left: boardSize * (13 / 15),
+                              top: boardSize * (10 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.blue.shade300),
+                          ludoPiece(
+                              left: boardSize * (10 / 15),
+                              top: boardSize * (13 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.blue.shade300),
+                          ludoPiece(
+                              left: boardSize * (13 / 15),
+                              top: boardSize * (13 / 15),
+                              pieceSize: pieceSize,
+                              color: Colors.blue.shade300),
+                        ],
                       ),
                     ),
-                    CustomPaint(
-                      size: Size(sizeHeight, sizeWeight),
-                      painter: MyPainterLeftUp(),
-                    ),
-                    ludoPiece(
-                        left: boardSize * (1 / 15),
-                        top: boardSize * (1 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.green.shade300),
-                    ludoPiece(
-                        left: boardSize * (4 / 15),
-                        top: boardSize * (1 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.green.shade300),
-                    ludoPiece(
-                        left: boardSize * (1 / 15),
-                        top: boardSize * (4 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.green.shade300),
-                    ludoPiece(
-                        left: boardSize * (4 / 15),
-                        top: boardSize * (4 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.green.shade300),
-                    CustomPaint(
-                      size: Size(sizeHeight, sizeWeight),
-                      painter: MyPainterRightUp(),
-                    ),
-                    ludoPiece(
-                        left: boardSize * (10 / 15),
-                        top: boardSize * (1 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.yellow.shade300),
-                    ludoPiece(
-                        left: boardSize * (13 / 15),
-                        top: boardSize * (1 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.yellow.shade300),
-                    ludoPiece(
-                        left: boardSize * (10 / 15),
-                        top: boardSize * (4 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.yellow.shade300),
-                    ludoPiece(
-                        left: boardSize * (13 / 15),
-                        top: boardSize * (4 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.yellow.shade300),
-                    CustomPaint(
-                      size: Size(sizeHeight, sizeWeight),
-                      painter: MyPainterLeftDown(),
-                    ),
-                    ludoPiece(
-                        left: boardSize * (1 / 15),
-                        top: boardSize * (10 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.red.shade300),
-                    ludoPiece(
-                        left: boardSize * (4 / 15),
-                        top: boardSize * (10 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.red.shade300),
-                    ludoPiece(
-                        left: boardSize * (1 / 15),
-                        top: boardSize * (13 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.red.shade300),
-                    ludoPiece(
-                        left: boardSize * (4 / 15),
-                        top: boardSize * (13 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.red.shade300),
-                    CustomPaint(
-                      size: Size(sizeHeight, sizeWeight),
-                      painter: MyPainterRightDown(),
-                    ),
-                    ludoPiece(
-                        left: boardSize * (10 / 15),
-                        top: boardSize * (10 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.blue.shade300),
-                    ludoPiece(
-                        left: boardSize * (13 / 15),
-                        top: boardSize * (10 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.blue.shade300),
-                    ludoPiece(
-                        left: boardSize * (10 / 15),
-                        top: boardSize * (13 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.blue.shade300),
-                    ludoPiece(
-                        left: boardSize * (13 / 15),
-                        top: boardSize * (13 / 15),
-                        pieceSize: pieceSize,
-                        color: Colors.blue.shade300),
-                  ],
+                  ),
+                );
+              },
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  number = dice.nextInt(6);
+                });
+              },
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: Transform.scale(
+                  scale: .4,
+                  child: Image(
+                    image: AssetImage('assets/$number.png'),
+                  ),
                 ),
               ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
