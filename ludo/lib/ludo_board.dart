@@ -4,7 +4,7 @@ class LudoBoard extends StatefulWidget {
   final String colorName;
   final String playerName;
 //  const LudoBoard({required String colorName, required String playerName});
-  LudoBoard({
+  const LudoBoard({
     required this.colorName,
     required this.playerName,
   });
@@ -24,6 +24,10 @@ class _LudoBoardState extends State<LudoBoard> {
         builder: (context, constraints) {
           double sizeHeight = constraints.maxHeight;
           double sizeWeight = constraints.maxWidth;
+          Size size = Size(sizeHeight, sizeWeight);
+          double boardSize = size.height;
+          double pieceSize = size.height / 15;
+
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(top: 10.0),
@@ -53,18 +57,98 @@ class _LudoBoardState extends State<LudoBoard> {
                       size: Size(sizeHeight, sizeWeight),
                       painter: MyPainterLeftUp(),
                     ),
+                    ludoPiece(
+                        left: boardSize * (1 / 15),
+                        top: boardSize * (1 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.green.shade300),
+                    ludoPiece(
+                        left: boardSize * (4 / 15),
+                        top: boardSize * (1 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.green.shade300),
+                    ludoPiece(
+                        left: boardSize * (1 / 15),
+                        top: boardSize * (4 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.green.shade300),
+                    ludoPiece(
+                        left: boardSize * (4 / 15),
+                        top: boardSize * (4 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.green.shade300),
                     CustomPaint(
                       size: Size(sizeHeight, sizeWeight),
                       painter: MyPainterRightUp(),
                     ),
+                    ludoPiece(
+                        left: boardSize * (10 / 15),
+                        top: boardSize * (1 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.yellow.shade300),
+                    ludoPiece(
+                        left: boardSize * (13 / 15),
+                        top: boardSize * (1 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.yellow.shade300),
+                    ludoPiece(
+                        left: boardSize * (10 / 15),
+                        top: boardSize * (4 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.yellow.shade300),
+                    ludoPiece(
+                        left: boardSize * (13 / 15),
+                        top: boardSize * (4 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.yellow.shade300),
                     CustomPaint(
                       size: Size(sizeHeight, sizeWeight),
                       painter: MyPainterLeftDown(),
                     ),
+                    ludoPiece(
+                        left: boardSize * (1 / 15),
+                        top: boardSize * (10 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.red.shade300),
+                    ludoPiece(
+                        left: boardSize * (4 / 15),
+                        top: boardSize * (10 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.red.shade300),
+                    ludoPiece(
+                        left: boardSize * (1 / 15),
+                        top: boardSize * (13 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.red.shade300),
+                    ludoPiece(
+                        left: boardSize * (4 / 15),
+                        top: boardSize * (13 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.red.shade300),
                     CustomPaint(
                       size: Size(sizeHeight, sizeWeight),
                       painter: MyPainterRightDown(),
                     ),
+                    ludoPiece(
+                        left: boardSize * (10 / 15),
+                        top: boardSize * (10 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.blue.shade300),
+                    ludoPiece(
+                        left: boardSize * (13 / 15),
+                        top: boardSize * (10 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.blue.shade300),
+                    ludoPiece(
+                        left: boardSize * (10 / 15),
+                        top: boardSize * (13 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.blue.shade300),
+                    ludoPiece(
+                        left: boardSize * (13 / 15),
+                        top: boardSize * (13 / 15),
+                        pieceSize: pieceSize,
+                        color: Colors.blue.shade300),
                   ],
                 ),
               ),
@@ -86,8 +170,7 @@ class MyPainterLeftUp extends CustomPainter {
     final rect = Rect.fromLTRB(left, top, right, bottom);
     final paint = Paint()
       ..color = Colors.green.shade800
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 4;
+      ..style = PaintingStyle.fill;
     canvas.drawRect(rect, paint);
   }
 
@@ -107,8 +190,7 @@ class MyPainterRightUp extends CustomPainter {
     final rect = Rect.fromLTRB(left, top, right, bottom);
     final paint = Paint()
       ..color = Colors.yellow.shade800
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 4;
+      ..style = PaintingStyle.fill;
     canvas.drawRect(rect, paint);
   }
 
@@ -128,8 +210,7 @@ class MyPainterLeftDown extends CustomPainter {
     final rect = Rect.fromLTRB(left, top, right, bottom);
     final paint = Paint()
       ..color = Colors.red.shade800
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 4;
+      ..style = PaintingStyle.fill;
     canvas.drawRect(rect, paint);
   }
 
@@ -149,13 +230,33 @@ class MyPainterRightDown extends CustomPainter {
     final rect = Rect.fromLTRB(left, top, right, bottom);
     final paint = Paint()
       ..color = Colors.blue.shade800
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 4;
+      ..style = PaintingStyle.fill;
     canvas.drawRect(rect, paint);
+    // print("The height is ${size.height}");
+    // print("The width is ${size.width}");
   }
 
   @override
   bool shouldRepaint(CustomPainter old) {
     return false;
   }
+}
+
+Widget ludoPiece(
+    {required double left,
+    required double top,
+    required double pieceSize,
+    required Color color}) {
+  return Positioned(
+    left: left,
+    top: top,
+    child: Container(
+      height: pieceSize,
+      width: pieceSize,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(200.0)),
+      ),
+    ),
+  );
 }
