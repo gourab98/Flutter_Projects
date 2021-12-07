@@ -18,7 +18,7 @@ class LudoBoard extends StatefulWidget {
 }
 
 class _LudoBoardState extends State<LudoBoard> {
-  var dice = new Random();
+  var dice = Random();
   int number = 1;
   @override
   Widget build(BuildContext context) {
