@@ -12,11 +12,11 @@ class ResultNotifier with ChangeNotifier {
     });
     _ranks[winnerPlayerIndex] = ++nextRank;
 
-    if (nextRank == 3)  //assign rank to last player
+    if (nextRank == 3) //assign rank to last player
       _ranks[_ranks.indexWhere((rank) {
         return rank == 0;
       })] = 4;
-      
+
     notifyListeners();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:statemanagement/counter.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,59 +11,104 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: Counter(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const MyHomePage(title: 'State Management System'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Table",
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colors.redAccent),
+        backgroundColor: Colors.blueAccent,
       ),
+      home: Table(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  // ignore: use_key_in_widget_constructors
-  const MyHomePage({required this.title});
+class Table extends StatefulWidget {
+  Table({Key? key}) : super(key: key);
 
-  void _incrementCounter(BuildContext context) {
-    Provider.of<Counter>(context, listen: false).incrementCounter();
+  @override
+  _TableState createState() => _TableState();
+}
+
+class _TableState extends State<Table> {
+  final myController = TextEditingController();
+
+  void dispose() {
+    myController.dispose();
+    super.dispose();
   }
+
+  String num = "";
+  int number = 0;
+  int i = 1;
 
   @override
   Widget build(BuildContext context) {
-    var counter = Provider.of<Counter>(context).getCounter;
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        title: Center(
+          child: Text("Number Finder Table"),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _incrementCounter(context);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(40.0),
+          child: ListView(
+            children: [
+              TextField(
+                controller: myController,
+                decoration: InputDecoration(
+                    labelStyle:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    labelText: "Please Enter a number for the table:"),
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),
+              Container(
+                alignment: Alignment.bottomRight,
+                padding: EdgeInsets.all(4),
+                color: Colors.transparent,
+                child: ElevatedButton(
+                  child: Container(
+                    child: Text(
+                      "Show",
+                      style: TextStyle(fontSize: 26),
+                    ),
+                  ),
+                  onPressed: () {
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) {
+                    //       return AlertDialog(
+                    //         content: Text(myController.text),
+                    //       );
+                    //     });
+                    setState(() {
+                      num = myController.text;
+                      number = int.parse(num);
+                      i = 1;
+                    });
+                  },
+                ),
+              ),
+              Center(
+                child: Container(
+                  child: Text(
+                    "The number is : $number",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              for (i; i <= 20; i++) Text(" $i X $number = ${i * number}"),
+            ],
+          ),
+        ),
       ),
     );
   }
