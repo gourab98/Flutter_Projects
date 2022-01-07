@@ -98,14 +98,14 @@ class _TableState extends State<Table> {
                 child: Container(
                   child: Text(
                     "The number is : $number",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              for (i; i <= 20; i++) Text(" $i X $number = ${i * number}"),
+              for (i; i <= 100; i++) Text(" $i X $number = ${i * number}"),
             ],
           ),
         ),
